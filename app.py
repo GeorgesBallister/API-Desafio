@@ -34,8 +34,11 @@ def Mock():
 def RetornaTudo():
     return load_data(DADOSBD)
 
-# Encontra pela "Primary Key" (Get)
-#@app.route('/users/find', methods=['GET'])
+# Encontra pelas "Primary Key" "Nome e Email" (Get)
+@app.route('/users/find', methods=['GET'])
+def QueryNameANDEmail(){
+    
+}
 
 # Atualiza dado (Put)
 #@app.route('/users/', methods=['PUT'])
