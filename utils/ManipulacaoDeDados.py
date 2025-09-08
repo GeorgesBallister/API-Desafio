@@ -6,21 +6,33 @@ import json
 
 # Carrega os dados do arquivo JSON "allData.json"
 def load_data(dadosDB):
-    # Abre Arquivo no caminho que sera fornecido pelo "DADOSDB"
     if os.path.exists(dadosDB):
-        # Le o arquivo
         with open(dadosDB, "r") as f:
-            return json.load(f)
+            try:
+                dados = json.load(f)
+            except json.JSONDecodeError:
+                return []  # Arquivo vazio ou inválido → retorna lista vazia
+
+        if isinstance(dados, dict):
+            return [dados]
+        elif isinstance(dados, list):
+            return dados
+        else:
+            return []
     else:
-    # Se não existir dados retorna uma mensagem
-        return "Sem Dados"
+        return []  # Se não existir, retorna lista vazia
+
 
 def save_data(data, dadosDB):
-    # Abre o arquivo "allData.json" como escrita 
-    with open(dadosDB, "w") as f:
-    # Pega os dados json armazenados em uma variavel, dos quais serão representados pelo parametro "data" e faz um dump a baixo dos dados já existentes
-        json.dump(data, f)
+    dadosAntigos = load_data(dadosDB)
 
+    if not isinstance(dadosAntigos, list):
+        dadosAntigos = []
+
+    dadosAntigos.append(data)
+
+    with open(dadosDB, "w") as f:
+        json.dump(dadosAntigos, f, indent=4)
 
 def load_moc(dadosDB):
     # Carrega dados fictícios no sistema e salva no JSON.
@@ -39,16 +51,5 @@ def load_moc(dadosDB):
     # Se não existir o arquivo retorna uma mensagem
         return jsonify({"message": "MOC de dados não existe"}), 201
 
-# Exibe todos dados formatados para que se possa executar funções de leitura ou filtragem avançada de forma mais facil
-def getTodosOsDados(dadosDB):
-    dadosNaoFormatados = load_data(dadosDB)
 
-    # Se os dados estiverem vazios
-    if not dadosNaoFormatados:
-        return jsonify({ 
-            "Erro" : "Sem dados no banco"
-        })
-    
-    # Coloquiei pra executar esse codigo com base em list porque o json do nosso dataset sempre sera uma lsita de dicionarios
-    if isinstance(dadosNaoFormatados, list):
-        return dadosNaoFormatados
+
