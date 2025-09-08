@@ -13,8 +13,8 @@ app = Flask("API-Valcann")
 # "Banco"
 DADOSBD = "Data/allData.json"
 
-# Carregar dados assim que tudo inicializar:
-usuarios = load_data(DADOSBD);
+# Carrega os dados:
+registros_Do_DB = load_data(DADOSBD);
 
 
 # ! Endpoints
@@ -35,11 +35,25 @@ def RetornaTudo():
     return load_data(DADOSBD)
 
 # Encontra pelas "Primary Key" "Nome e Email" (Get)
-@app.route('/users/find', methods=['GET'])
-def QueryNameANDEmail(){
-    
-}
+@app.route('/users/find/', methods=['GET'])
+def QueryNameANDEmail():
 
+    # Argumentos que serão mandados pelo get no corpo do JSON de Request
+    nome = request.args.get("nome").strip().lower()
+    email = request.args.get("email").strip().lower()
+
+
+    for registro in registros_Do_DB:
+        nome_registrado = str(registro.get("nome", "")).strip().lower()
+        email_registrado = str(registro.get("email", "")).strip().lower()
+        if nome_registrado == nome and email_registrado == email:
+            return jsonify({
+                "Usuario" : registro
+            }), 200
+        
+        return jsonify({
+            "Erro" : "Não foi possivel encontrar este usuario, verifique sua solicitação"
+        }), 404
 # Atualiza dado (Put)
 #@app.route('/users/', methods=['PUT'])
 

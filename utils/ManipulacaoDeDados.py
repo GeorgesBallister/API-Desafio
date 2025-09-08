@@ -39,3 +39,16 @@ def load_moc(dadosDB):
     # Se não existir o arquivo retorna uma mensagem
         return jsonify({"message": "MOC de dados não existe"}), 201
 
+# Exibe todos dados formatados para que se possa executar funções de leitura ou filtragem avançada de forma mais facil
+def getTodosOsDados(dadosDB):
+    dadosNaoFormatados = load_data(dadosDB)
+
+    # Se os dados estiverem vazios
+    if not dadosNaoFormatados:
+        return jsonify({ 
+            "Erro" : "Sem dados no banco"
+        })
+    
+    # Coloquiei pra executar esse codigo com base em list porque o json do nosso dataset sempre sera uma lsita de dicionarios
+    if isinstance(dadosNaoFormatados, list):
+        return dadosNaoFormatados
