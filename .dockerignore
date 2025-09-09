@@ -1,0 +1,5 @@
+# Pasta para ignorar
+Documentacao/
+
+# Arquivo para ignorar
+tests.py
