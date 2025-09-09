@@ -1,11 +1,29 @@
-# Bibliotecas
-from flask import Flask, request, jsonify
-import json
-import os
+"""
+    Desenvolvedor : Georges Ballister de Oliveira
+    Tempo de Desenvolvimento: 07/09/2025 23:00h - 08/09/2025 21:45
+    Objetivo: Desenvolvi este sistema com o intuito de realizar a avaliação Técnica do Processo Seletivo: Desenvolvedor(a) Back-end Júnior para a empresa VALCANN, escolhi implementar uma ideia que eu julguei ser o mais intuitivo possivel e direto a fim de facilitar o trabalho de quem for avaliar este software, acabei por optar em desenvolver esta API para que se possa interagir com um "pseudo banco de dados", que na verdade é um arquivo json, que esta no diretorio "/Data/allData.json".
+    Alem disto "Dockerizei" a aplicação para que se transforme em algo mais facil de implementar em um mini projeto um pouco mais fidedigno com a area de atuação da VALCANN, ou seja, podendo rodar em "nuvem" optimizando o uso dos recursos.
+"""
 
-# Importando os Utils
-from utils.ManipulacaoDeDados import load_data, save_data, load_moc
-from utils.GerarID import gerarID
+
+# Biblioteca que vou usar para fazer a construção da API (FLASK)
+from flask import Flask
+
+
+# Importando os modulos de
+from utils.modules.ManipulacaoDeDados import load_data, load_moc
+
+# Modulo para funções de POST
+from utils.controllers.POST_Functions import NovoRegistro
+
+# Modulo para funções de GET
+from utils.controllers.GET_Functions import EcontrarDadosPorNomeEEmail
+
+# Modulo para funções de PUT
+from utils.controllers.PUT_Functions import AtualizarRegistroPorID
+
+# Modulo para funções de DELETE
+from utils.controllers.DELETE_Functions import ApagarDadosPorID
 
 # ! Instância Flask e Nome da API
 app = Flask("API-Valcann") 
@@ -13,87 +31,37 @@ app = Flask("API-Valcann")
 # "Banco"
 DADOSBD = "Data/allData.json"
 
-# Carrega os dados:
-
-
-
 # ! Endpoints
 
-# Mock
+# * Mock (Inserir os dados Ficticios)
 @app.route('/moc', methods=['POST'])
 def Mock():
     return load_moc(DADOSBD)
 
-# Atualiza dado (Put)
-# @app.route('/users/register', methods=['POST'])
-# def registrar_usuarios():
-    
-
-# Lista todos (Get)
+# * Lista todos (Get)
 @app.route('/users/all', methods=['GET'])
 def ReturnALLData():
     return load_data(DADOSBD)
 
-# Encontra pelas "Primary Key" "Nome e Email" (Get)
+# * Encontra pelas "Primary Key" "Nome e Email" (Get)
 @app.route('/users/find/', methods=['GET'])
 def QueryNameANDEmail():
+    return EcontrarDadosPorNomeEEmail(DADOSBD);
 
-    # Lendo o Banco
-    registros_Do_DB = load_data(DADOSBD)
-
-    # Argumentos que serão mandados pelo get no corpo do JSON de Request
-    nome = request.args.get("nome").strip().lower()
-    email = request.args.get("email").strip().lower()
-
-
-    for registro in registros_Do_DB:
-        nome_registrado = str(registro.get("nome", "")).strip().lower()
-        email_registrado = str(registro.get("email", "")).strip().lower()
-        
-        if nome_registrado == nome and email_registrado == email:
-            return jsonify({
-                "Usuario" : registro
-            }), 200
-        
-    return jsonify({
-        "Erro" : "Não foi possivel encontrar este usuario, verifique sua solicitação"
-    }), 404
-
-# Registro no Banco (Post)
+# * Registro no Banco (Post)
 @app.route('/users/', methods=['POST'])
 def Register_User():
-    # Lendo o Banco
-    registros_Do_DB = load_data(DADOSBD);
+   return NovoRegistro(DADOSBD)
 
-    # Aqui vai ser armazenado oque o usuario colocar no body do HTTP Request
-    dadosDoBody = request.get_json() or {}
-    
-    # Dados que toda requisição vai ser obrigada a ter
-    dadosObrigatorios = ['nome', 'email'];
+# * Atualiza dado (Put)
+@app.route('/users/update/<user_id>', methods=['PUT'])
+def atualizar_Registro(user_id):
+    return AtualizarRegistroPorID(DADOSBD, user_id)
 
-    # Validação para saber se os dados obrigatoris foram colocados
-    if any(dadoObrig not in dadosDoBody or not dadosDoBody[dadoObrig] for dadoObrig in dadosObrigatorios ):
-        return jsonify({"error": "Dados inválidos: Todos os campos são obrigatórios", "campos_obrigatorios": dadosObrigatorios}), 400
-    
-    # Verificando se já existe aquele email
-    for registro in registros_Do_DB:
-        if registro.get("email", "").strip().lower() == dadosDoBody["email"].strip().lower():
-
-            return jsonify({"error": "Este email já esta cadastrado em nosso sistema, por favor tente outro ."}), 409
-
-    # ! Gerando ID unico
-    idNovo = gerarID(DADOSBD)
-    dadosDoBody["id"] = idNovo
-
-    # Salvando os dados no JSON
-    save_data(dadosDoBody, DADOSBD)
-    return jsonify({"message": "Usuário cadastrado com sucesso!", "usuario": dadosDoBody}), 201
-
-
-
-
-# Deleta Dados (Delete)
-#@app.route('/users/all', methods=['DELETE'])
+# * Deleta Dados (Delete)
+@app.route('/users/<user_id>', methods=['DELETE'])
+def Apagar_Usuario(user_id):
+   return ApagarDadosPorID(DADOSBD, user_id)
 
 
 # Rodar API

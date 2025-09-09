@@ -36,20 +36,22 @@ def save_data(data, dadosDB):
 
 def load_moc(dadosDB):
     # Carrega dados fictícios no sistema e salva no JSON.
-     caminho_mock = "Data/mock.json"
+    caminho_mock = "Data/mock.json"
     
-    # Verifica se o arquivo existe no caminho
-     if os.path.exists(caminho_mock):
-        # Abre o Arquivo, lê e referencia como "f"
-        with open(caminho_mock, "r") as f:
-           # Salva o conteudo do arquivo nessa variavel
-           userMock = json.load(f)
-           # Salva no banco de dados tudo
-           save_data(userMock, dadosDB)
-           return jsonify({"message": "MOC de dados carregado com sucesso!", "usuarios": userMock}), 201
-     else:
-    # Se não existir o arquivo retorna uma mensagem
-        return jsonify({"message": "MOC de dados não existe"}), 201
+    if os.path.exists(caminho_mock):
+        with open(caminho_mock, "r") as dados:
+            dadosMock = json.load(dados)
 
+        if isinstance(dadosMock, list):
+            for usuario in dadosMock:
+                save_data(usuario, dadosDB)
+                
+        return jsonify({
+            "message": "MOCK de dados carregado com sucesso!", 
+            "usuarios": dadosMock}), 201
+    else:
+        return jsonify({
+            "Erro" : "MOCK de dados fictios não existe"
+        }), 404
 
 

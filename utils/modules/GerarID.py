@@ -2,7 +2,7 @@
 import uuid
 
 # Import do Modulo
-from utils.ManipulacaoDeDados import load_data
+from utils.modules.ManipulacaoDeDados import load_data
 
 def gerarID(dadosBD, key="id"):
     dadosParaVerificacao = load_data(dadosBD)
