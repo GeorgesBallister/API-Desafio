@@ -13,6 +13,7 @@
 
 # Bibliotecas que vou usar para fazer a construção da API (FLASK)
 from flask import Flask
+from flask_cors import CORS
 
 
 # ! ====================== MODULES ======================
@@ -37,6 +38,13 @@ from utils.controllers.DELETE_Functions import ApagarDadosPorID
 
 # ! Instância Flask e Nome da API
 app = Flask("API-Valcann") 
+
+# Habilitando o CORS
+CORS(app, resources={
+    r"/users/*": {"origins": "*", 'methods' : ["GET", "POST", "PUT", "DELETE", "OPTIONS"]},
+    r"/moc" : {"origins": "*","methods" : ["POST"]} 
+    })
+
 
 # "Banco" este pseudo banco de dados NOSQL vai ser por completo concentrado dentro de um arquivo JSON, utilizando de sua estrutura versatio, eu consegui desenvolver todos os conceitos do CRUD dento da arquitetura de uma REST API, com todos os HTTP METHODS interagindo com este arquivo atraves dos endpoints
 DADOSBD = "Data/allData.json"
