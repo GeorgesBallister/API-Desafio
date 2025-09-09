@@ -1,10 +1,13 @@
 # Aqui contera todas as funções remetentes aos endpoints: PUT
 
+# * Bibliotecas e Modulos
 from flask import request, jsonify
 import json
-
 from utils.modules.ManipulacaoDeDados import load_data
 
+# ! A sobrecarga de metodo/parametro "dadosDB" EM TODAS as funções deve ser preenchida com a variavel "DADOSBD" do arquivo APP.PY, pois ele ira interagir com o arquivo "allData.json".
+
+# * 
 def AtualizarRegistroPorID(DADOSBD, user_id):
     # Lendo o Banco
     registros_Do_DB = load_data(DADOSBD);

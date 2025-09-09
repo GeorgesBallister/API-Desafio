@@ -1,7 +1,12 @@
 # Aqui contera todas as funções remetentes aos endpoints: DELETE
+
+# * Bibliotecas e Modulos
 import json
 from flask import jsonify
 from utils.modules.ManipulacaoDeDados import load_data
+
+# ! A sobrecarga de metodo/parametro "dadosDB" EM TODAS as funções deve ser preenchida com a variavel "DADOSBD" do arquivo APP.PY, pois ele ira interagir com o arquivo "allData.json".
+
 
 def ApagarDadosPorID(DADOSBD, user_id):
      # Lendo o Banco
