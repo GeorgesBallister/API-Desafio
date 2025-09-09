@@ -6,13 +6,16 @@ from utils.modules.ManipulacaoDeDados import load_data
 
 # ! A sobrecarga de metodo/parametro "dadosDB" EM TODAS as funções deve ser preenchida com a variavel "DADOSBD" do arquivo APP.PY, pois ele ira interagir com o arquivo "allData.json".
 
+# This section of code defines a function called `EcontrarDadosPorNomeEEmail` that
+# is responsible for finding data based on a given name and email. It is designed
+# to be used as an endpoint in a Flask application with the route '/users/find/'.
 
 # * Econtrar Dados Por Nome E Email
 ## Endpoint que será utilizado: '/users/find/'
 
 def EcontrarDadosPorNomeEEmail(DADOSBD):
     
-    # 1: Ler o Banco e armazenar
+    # 1: Ler o Banco e armazena
     registros_Do_DB = load_data(DADOSBD);
 
     # 2: Define os argumentos obrigatorios que serão mandados pelo get no corpo do Request como parametros no endpoint
