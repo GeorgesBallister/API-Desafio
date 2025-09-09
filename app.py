@@ -2,6 +2,7 @@
     Desenvolvedor : Georges Ballister de Oliveira
     Tempo de Desenvolvimento: 07/09/2025 23:00h - 08/09/2025 21:45
     Objetivo: Desenvolvi este sistema com o intuito de realizar a avaliação Técnica do Processo Seletivo: Desenvolvedor(a) Back-end Júnior para a empresa VALCANN, escolhi implementar uma ideia que eu julguei ser o mais intuitivo possivel e direto a fim de facilitar o trabalho de quem for avaliar este software, acabei por optar em desenvolver esta API para que se possa interagir com um "pseudo banco de dados", que na verdade é um arquivo json, que esta no diretorio "/Data/allData.json".
+    
     Alem disto "Dockerizei" a aplicação para que se transforme em algo mais facil de implementar em um mini projeto um pouco mais fidedigno com a area de atuação da VALCANN, ou seja, podendo rodar em "nuvem" optimizando o uso dos recursos.
 """
 
@@ -65,6 +66,6 @@ def Apagar_Usuario(user_id):
 
 
 # Rodar API
-app.run(host='127.0.0.1', # IP
+app.run(host='0.0.0.0', # IP para poder ficar exposto no Docker
         port=5000, # Porta
         debug=True) # Debug
