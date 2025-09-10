@@ -43,7 +43,7 @@ def AtualizarRegistroPorID(DADOSBD, user_id):
     # Este laço de repeticção vai se basear em fornecer essas 2 informações por vez 
     for indiceDoRegistro, registro in enumerate(registros_Do_DB):
         # 6.1: Se o "user_id" fornecido como argumento no url do endpoint tiver o mesmo valor id da key "id" dentro dos registros ele executara.
-        if registro.get("id") == user_id:
+        if str(registro.get("id")) == str(user_id):
 
             # 6.1.1: Aqui vai fazer a atualização dos novos dados
             # Ele vai percorrer o conteudo do body do HTTP Request, atraves de um laço de repetição com dois elementos individuais:

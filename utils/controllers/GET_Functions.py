@@ -20,7 +20,7 @@ def EcontrarDadosPorNomeEEmail(DADOSBD):
 
     # 2: Define os argumentos obrigatorios que serão mandados pelo get no corpo do Request como parametros no endpoint
     # 2.1: transforma ambos os dois campos (nome e email) em 2 variaveis com seu respectivo nome, porem com os dados normalizados em letras minusculas para facilitar a verificação no banco de dados.
-    nome = request.args.get("nome").strip().lower()
+    nome = request.args.get("name").strip().lower()
     email = request.args.get("email").strip().lower()
 
     # 3: Roda um loop passando por todos os registros do banco de dados.
@@ -29,7 +29,7 @@ def EcontrarDadosPorNomeEEmail(DADOSBD):
             # O valor da key 'nome' do registro daquele momento e o valor da key 'email'
         # Obtendo seus valores atravez da função 'get' que está presente no elemento individual da lista
         # Normalizando seus valores em letras minusculas
-        nome_registrado = str(registro.get("nome", "")).strip().lower()
+        nome_registrado = str(registro.get("name", "")).strip().lower()
         email_registrado = str(registro.get("email", "")).strip().lower()
         
         # 3.2: Aqui cada loop do laço de repetição vai verificar os valores das key's salvas com os valores dos argumentos passados.

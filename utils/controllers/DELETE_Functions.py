@@ -16,7 +16,7 @@ def ApagarDadosPorID(DADOSBD, user_id):
 
     # 2: Filtra todos os registros, deixando de fora apenas o registro que possuir o Id igual ao parametro 'user_id' passado no escopo do endpoint.
     registrosFiltrados = [registro for registro in registros_Do_DB # Ele percorre atravez de um loop cada registro o armazenando-o na nova lista
-                          if registro.get("id") != user_id] # Aqui ele define que salvara apenas os registros que tem o valor da key 'id' diferente do valor do parametro 'user_id'
+                          if str(registro.get("id")) != str(user_id)] # Aqui ele define que salvara apenas os registros que tem o valor da key 'id' diferente do valor do parametro 'user_id', lendo eles como string para evitar erros
 
     # 3: Comparamos dois valores para verificar se aquele registro realmente existe:
     # valor 1: Comprimento da lista que tem apenas os valores filtrado

@@ -10,7 +10,7 @@ BASE_URL = "http://127.0.0.1:5000" # TODO: Se o endereço da API mudar quando fo
 
 # * Testar Mock
 def test_mock():
-    res = requests.post(f"{BASE_URL}/moc")
+    res = requests.post(f"{BASE_URL}/mocValcann")
     if res.status_code == 201:
         print(f"Teste MOCK Passou! {res.status_code} ✅")
     else:
@@ -22,8 +22,9 @@ def test_mock():
 # Cenario 1 (Dados todos Certos):  
 def test_register_user1():
     registroNovo = {
-        "nome": "Monkey D. Luffy",
-        "email": "eusouoR3iDosP1r4t4s@gmail.com",
+        "name": "Monkey D. Luffy",
+        "role" : "pirate",
+        "email" : "eusouoR3iDosP1r4t4s@gmail.com",
         "page": {
                 "page_size": 20,
                 "pageActual": 2
@@ -38,7 +39,8 @@ def test_register_user1():
 # Cenario 2 (Email Repetido com registro aterior):  
 def test_register_user2():
     registroNovo = {
-        "nome": "Buggy, o Palhaço Estrela",
+        "name": "Buggy, o Palhaço Estrela",
+        "role" : "pirate", 
         "email": "eusouoR3iDosP1r4t4s@gmail.com",
         "page": {
                 "page_size": 30,
@@ -54,7 +56,8 @@ def test_register_user2():
 # Cenario 3 (page_size > 50):  
 def test_register_user3():
     registroNovo = {
-        "nome": "Dante Alighieri",
+        "name": "Dante Alighieri",
+        "role" : "writer", 
         "email": "adivinaCOMEDIAHAHAHAH@gmail.com",
         "page": {
                 "page_size": 60,
@@ -76,7 +79,8 @@ def test_register_user3():
 # Cenario 4 (pageActual > page_size):  
 def test_register_user4():
     registroNovo = {
-        "nome": "Dr. Gregory House",
+        "name": "Dr. Gregory House",
+        "role" : "medic", 
         "email": "vicodin123@gmail.com",
         "page": {
                 "page_size": 20,
@@ -100,7 +104,8 @@ def test_register_user4():
 # Cenario 5 (pageActual > page_size & page_size > 50):  
 def test_register_user5():
     registroNovo = {
-        "nome": "Simon Riley",
+        "name": "Simon Riley",
+        "role" : "military", 
         "email": "eunaosouoGh0sT@gmail.com",
         "page": {
                 "page_size": 100,
@@ -136,7 +141,7 @@ def test_get_all():
 # Buscar Registros => Cenario 1:
 def test_find_user():
     parametros = {
-        "nome": "Monkey D. Luffy", 
+        "name": "Monkey D. Luffy",
         "email": "eusouoR3iDosP1r4t4s@gmail.com"
         }
     
@@ -152,9 +157,10 @@ def test_find_user():
 
 # Atualizar dado => gerado pelo mock.json
 def test_update_user1():
-    ID = 'fc571b9a-f418-488f-ac8e-8e5a0028512c'
+    ID = 1
     dadosAtualizados = {
-        "nome": "Daniel", 
+        "name": "Daniel", 
+        "role" : "developer", 
         "email": "supercitzen@gmail.com", 
         "page": {
             "page_size": 30
@@ -167,11 +173,11 @@ def test_update_user1():
 
         dadosUsuario = registroAtualizado.get('usuario', {})
 
-        nomeAtualizado = dadosUsuario['nome']
+        nomeAtualizado = dadosUsuario["name"]
         emailAtualizado = dadosUsuario['email']
         pageSizeAtualizado = dadosUsuario['page']['page_size']
 
-        if (nomeAtualizado == dadosAtualizados["nome"] and 
+        if (nomeAtualizado == dadosAtualizados["name"] and 
             emailAtualizado == dadosAtualizados["email"] and 
             pageSizeAtualizado == dadosAtualizados["page"]["page_size"]):
             print(f"Teste UPDATE - ATUALIZAR DADO Passou! {res.status_code} - Registro atualizado com Sucesso ✅ ")
@@ -184,7 +190,8 @@ def test_update_user1():
 def test_update_user2():
     ID = 'fc571b9a-f41'
     dadosAtualizados = {
-        "nome": "My Head Is Empty", 
+        "name": "My Head Is Empty", 
+        "role" : "artist", 
         "email": "mirandaRain@gmail.com", 
         "page": {
             "page_size": 20
@@ -200,7 +207,7 @@ def test_update_user2():
 
 # Cenario 1: Dado Existe e foi excluido
 def test_delete_user1():
-    ID = "ca4d2093-225e-4593-b6c9-7885e5e19106"
+    ID = 2
     res = requests.delete(f"{BASE_URL}/users/{ID}")
     if res.status_code == 200:
         print(f"Teste DELETE - EXCLUIR DADO Passou! {res.status_code} - Registro apagado do sistema. ✅ ")
@@ -210,7 +217,7 @@ def test_delete_user1():
 
 # Cenario 2: Dado não existe e não pode ser excluido
 def test_delete_user2():
-    ID = "ca4d2093-225e-4593-b6c9-7885e5e19106"
+    ID = "2"
     res = requests.delete(f"{BASE_URL}/users/delete/{ID}")
     if res.status_code == 404:
         print(f"Teste DELETE - Dado não existe Passou! {res.status_code} - Registro não foi apagado do sistema. ✅ ")

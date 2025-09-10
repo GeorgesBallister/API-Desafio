@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Bruno Nogueira",
+    "email": "bnogueira1@widgets.org",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2024-05-26T17:11:48Z"
+  },
+  {
+    "id": 2,
+    "name": "Felipe Ferraz",
+    "email": "fferraz2@contoso.dev",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2025-02-28T21:24:25Z"
+  },
+  {
+    "id": 3,
+    "name": "Tiago Hoffmann",
+    "email": "thoffmann3@acme.io",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2024-09-10T22:07:40Z"
+  },
+  {
+    "id": 4,
+    "name": "Lucas Hoffmann",
+    "email": "lhoffmann4@contoso.dev",
+    "role": "admin",
+    "is_active": false,
+    "created_at": "2024-12-27T19:06:35Z"
+  },
+  {
+    "id": 5,
+    "name": "Diego Gomes",
+    "email": "dgomes5@contoso.dev",
+    "role": "viewer",
+    "is_active": true,
+    "created_at": "2024-02-02T21:47:39Z"
+  },
+  {
+    "id": 6,
+    "name": "Felipe Lima",
+    "email": "flima6@widgets.org",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2025-04-05T07:09:34Z"
+  },
+  {
+    "id": 7,
+    "name": "Rafael Silva",
+    "email": "rsilva7@example.com",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2024-06-01T10:17:47Z"
+  },
+  {
+    "id": 8,
+    "name": "Carla Gomes",
+    "email": "cgomes8@example.com",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2024-06-11T02:25:02Z"
+  },
+  {
+    "id": 9,
+    "name": "Lucas Teixeira",
+    "email": "lteixeira9@example.com",
+    "role": "viewer",
+    "is_active": true,
+    "created_at": "2025-01-10T03:02:47Z"
+  },
+  {
+    "id": 10,
+    "name": "Otávio Pereira",
+    "email": "opereira10@widgets.org",
+    "role": "admin",
+    "is_active": true,
+    "created_at": "2025-01-11T17:33:36Z"
+  },
+  {
+    "id": 11,
+    "name": "Isabela Lima",
+    "email": "ilima11@contoso.dev",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2024-04-24T15:13:03Z"
+  },
+  {
+    "id": 12,
+    "name": "Sofia Ibrahim",
+    "email": "sibrahim12@widgets.org",
+    "role": "manager",
+    "is_active": false,
+    "created_at": "2025-08-10T12:47:31Z"
+  },
+  {
+    "id": 13,
+    "name": "Paula Silva",
+    "email": "psilva13@example.com",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2025-02-28T08:33:50Z"
+  },
+  {
+    "id": 14,
+    "name": "Nina Cardoso",
+    "email": "ncardoso14@contoso.dev",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2025-08-11T20:18:03Z"
+  },
+  {
+    "id": 15,
+    "name": "Carla Moraes",
+    "email": "cmoraes15@widgets.org",
+    "role": "viewer",
+    "is_active": true,
+    "created_at": "2024-04-23T10:03:59Z"
+  },
+  {
+    "id": 16,
+    "name": "Nina Teixeira",
+    "email": "nteixeira16@example.com",
+    "role": "viewer",
+    "is_active": true,
+    "created_at": "2024-01-22T09:14:13Z"
+  },
+  {
+    "id": 17,
+    "name": "Gabriela Hoffmann",
+    "email": "ghoffmann17@contoso.dev",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2025-02-21T09:46:30Z"
+  },
+  {
+    "id": 18,
+    "name": "Tiago Cardoso",
+    "email": "tcardoso18@acme.io",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2024-01-04T22:55:21Z"
+  },
+  {
+    "id": 19,
+    "name": "Otávio Silva",
+    "email": "osilva19@example.com",
+    "role": "manager",
+    "is_active": false,
+    "created_at": "2024-12-03T20:08:08Z"
+  },
+  {
+    "id": 20,
+    "name": "Rafael Ramos",
+    "email": "rramos20@widgets.org",
+    "role": "analyst",
+    "is_active": true,
+    "created_at": "2024-08-07T07:29:02Z"
+  },
+  {
+    "id": 21,
+    "name": "Ana Almeida",
+    "email": "aalmeida21@acme.io",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2025-04-29T18:00:03Z"
+  },
+  {
+    "id": 22,
+    "name": "Karla Gomes",
+    "email": "kgomes22@example.com",
+    "role": "admin",
+    "is_active": true,
+    "created_at": "2025-03-05T13:32:42Z"
+  },
+  {
+    "id": 23,
+    "name": "Nina Ibrahim",
+    "email": "nibrahim23@contoso.dev",
+    "role": "analyst",
+    "is_active": false,
+    "created_at": "2025-07-13T21:22:30Z"
+  },
+  {
+    "id": 24,
+    "name": "Rafael Silva",
+    "email": "rsilva24@contoso.dev",
+    "role": "viewer",
+    "is_active": true,
+    "created_at": "2024-08-13T21:30:39Z"
+  },
+  {
+    "id": 25,
+    "name": "Diego Moraes",
+    "email": "dmoraes25@acme.io",
+    "role": "manager",
+    "is_active": true,
+    "created_at": "2025-07-05T11:45:04Z"
+  }
+]

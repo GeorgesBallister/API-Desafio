@@ -51,10 +51,11 @@ def save_data(data, dadosDB):
         json.dump(todosOsRegistros, f)
 
 
-# * Carrega dados fictícios no sistema e salva no JSON.
-def load_moc(dadosDB):
+# * Carrega dados fictícios que a VALCANN DISPONIBILIZOU no sistema e salva no JSON.
+
+def load_moc_Valcann(dadosDB):
     # 1: Pega o caminho de onde esta o mock
-    caminho_mock = "Data/mock.json"
+    caminho_mock = "Data/mock-users.json"
     
     # 2: Verifica se o arquivo existe
     if os.path.exists(caminho_mock):
@@ -79,5 +80,4 @@ def load_moc(dadosDB):
         return jsonify({
             "Erro" : "MOCK de dados fictios não existe"
         }), 404
-
 

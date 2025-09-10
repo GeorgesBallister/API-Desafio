@@ -4,6 +4,7 @@
 from flask import request, jsonify
 from utils.modules.ManipulacaoDeDados import load_data, save_data
 from utils.modules.GerarID import gerarID
+from datetime import datetime
 
 # ! A sobrecarga de metodo/parametro "dadosDB" EM TODAS as funções deve ser preenchida com a variavel "DADOSBD" do arquivo APP.PY, pois ele ira interagir com o arquivo "allData.json".
 
@@ -17,7 +18,7 @@ def NovoRegistro(DADOSBD):
     dadosDoBody = request.get_json() or {}
     
     # 3: Define os dados obrigatorios dentro do escopo do JSON
-    listaDeDadosObrigatorios = ['nome', 'email'];
+    listaDeDadosObrigatorios = ['name', 'email','role'];
 
     # 4: Verificação dos dados obrigatorios dentro do escopo do JSON
 
@@ -111,8 +112,28 @@ def NovoRegistro(DADOSBD):
     # 12: Vai agregar o novo ID a key 'id' dentro no escopo do body
     dadosDoBody["id"] = idNovo
 
-    # 13: Aqui ele vai salvar os dados no JSON usando a função do modolulo utils.modules.ManipulacaoDeDados
+    # 13: Gerar o valor do campo Is_active
+    # 13.1: Primeiramente devemos procurar se o valor existe armazenamos oque esta no campo
+    is_activeValor = dadosDoBody.get("is_active")
+
+    # 13.2: Valida-se se o campo não tem algum valor, se ele não tiver, por padrão vamos colocar como TRUE.
+    if not isinstance(is_activeValor, bool):
+        dadosDoBody["is_active"] = True
+    
+    # 13.2.1 Caso o campo já vinher com algum valor do body, somente colocamos ele no mesmo canto
+    else:
+        dadosDoBody["is_active"] = is_activeValor
+
+
+    # 14: Gera uma variavel com o registro do tempo naquele momento
+    timeNow = datetime.now()
+    # 14.1: Formata o texto para ficar igual a referencia do MOCK-USERS
+    timeNowFormatado = timeNow.strftime("%Y-%m-%dT%H:%M:%SZ")
+    dadosDoBody['created_at'] = timeNowFormatado
+
+    # 15: Aqui ele vai salvar os dados no JSON usando a função do modolulo utils.modules.ManipulacaoDeDados
     save_data(dadosDoBody, DADOSBD)
 
-    # 14: Se tudo ocorrer certo, a função vai retornar uma mensagem de sucesso 201 (criado) e junto a ela dentro do body do HTTP Response vira o novo dado que foi registrado.
+    # 16: Se tudo ocorrer certo, a função vai retornar uma mensagem de sucesso 201 (criado) e junto a ela dentro do body do HTTP Response vira o novo dado que foi registrado.
     return jsonify({"message": "Usuário cadastrado com sucesso!", "usuario": dadosDoBody}), 201
+

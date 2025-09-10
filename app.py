@@ -22,7 +22,7 @@ from flask_cors import CORS
 # * Dito isto, todas as novas funções que forem criadas devem seguir esta "regra de negocio" para que se mantenha o ambiente organizado e facilite a manutenibilidade.
 
 # Importando os modulos Para o MOC ('/moc', methods=['POST']) e O metodo de "getAll" ('/users/all', methods=['GET'])
-from utils.modules.ManipulacaoDeDados import load_data, load_moc
+from utils.modules.ManipulacaoDeDados import load_data, load_moc_Valcann
 
 # Modulo para funções de POST
 from utils.controllers.POST_Functions import NovoRegistro
@@ -42,7 +42,7 @@ app = Flask("API-Valcann")
 # Habilitando o CORS
 CORS(app, resources={
     r"/users/*": {"origins": "*", 'methods' : ["GET", "POST", "PUT", "DELETE", "OPTIONS"]},
-    r"/moc" : {"origins": "*","methods" : ["POST"]} 
+    r"/mocValcann" : {"origins": "*","methods" : ["POST"]} 
     })
 
 
@@ -54,9 +54,9 @@ DADOSBD = "Data/allData.json"
 ## === HTTP POST's ===
 
 # * Mock (Inserir os dados Ficticios)
-@app.route('/moc', methods=['POST'])
+@app.route('/mocValcann', methods=['POST'])
 def Mock():
-    return load_moc(DADOSBD)
+    return load_moc_Valcann(DADOSBD)
 
 # * Registro no Banco (Post)
 @app.route('/users/', methods=['POST'])

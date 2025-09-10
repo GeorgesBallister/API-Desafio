@@ -32,7 +32,7 @@ O objetivo foi criar um ambiente simples e funcional para avaliação técnica d
 - 🔎 Busca de usuários por nome e e-mail (`GET /users/find/`)
 - ✏️ Atualização de usuários por ID (`PUT /users/update/<user_id>`)
 - ❌ Exclusão de usuários por ID (`DELETE /users/<user_id>`)
-- 🧪 Inserção de dados fictícios (Mock) (`POST /moc`)
+- 🧪 Inserção de dados fictícios (Mock-Users) (`POST /mocValcann`)
 
 O projeto também está **dockerizado** para facilitar a execução em ambientes isolados.
 
@@ -52,10 +52,10 @@ API-Valcann/
 |
 +---Data
 |       allData.json              # "Banco de dados" principal (pseudo NoSQL)
-|       mock.json                 # Dados fictícios para popular o sistema (MOC)
+|       mock-users.json           # Dados fictícios para popular o sistema (MOC)
 |
 +---Documentacao
-|       Como funciona a construção dos controllers.md  # Guia explicativo interno
+|       valcann-logo.png          # Logo para o README.md
 |
 \---utils
     |   __init__.py               # Identificação do pacote Python
@@ -122,14 +122,14 @@ python app.py
 
 ## 🌐 Endpoints Disponíveis
 
-| Método | Endpoint                  | Descrição                      |
-| ------ | ------------------------- | ------------------------------ |
-| POST   | /users/                   | Cadastrar usuário              |
-| GET    | /users/all                | Listar todos os usuários       |
-| GET    | /users/find/              | Buscar usuário por nome/e-mail |
-| PUT    | /users/update/\<user\_id> | Atualizar usuário              |
-| DELETE | /users/\<user\_id>        | Deletar usuário                |
-| POST   | /moc                      | Inserir dados fictícios (mock) |
+| Método | Endpoint                  | Descrição                            |
+| ------ | ------------------------- | ------------------------------------ |
+| POST   | /users/                   | Cadastrar usuário                    |
+| GET    | /users/all                | Listar todos os usuários             |
+| GET    | /users/find/              | Buscar usuário por nome/e-mail       |
+| PUT    | /users/update/\<user\_id> | Atualizar usuário                    |
+| DELETE | /users/\<user\_id>        | Deletar usuário                      |
+| POST   | /mocValcann               | Inserir dados fictícios (mock-users) |
 
 ---
 
@@ -164,11 +164,11 @@ python tests.py
 
 🔍 O script valida:
 
+* Mock de dados (mock-users.json) — **Disponibilizado pela Valcann**
 * Inserção de usuários (POST) — **5 cenários diferentes**
 * Busca de usuários (GET) — **2 cenários diferentes**
 * Atualização de usuários (PUT) — **2 cenários diferentes**
 * Exclusão de usuários (DELETE) — **2 cenários diferentes**
-* Mock de dados
 
 ➡️ Os resultados serão exibidos no terminal com status ✅ ou 🚫 para cada teste.
 
